@@ -1,19 +1,15 @@
 {
-	"name": "n8n-nodes-e1-test",
-	"version": "2.0.4",
-	"description": "E1 Test node for BotPenguin - Dev",
+	"name": "n8n-nodes-botPenguin",
+	"version": "1.0.0",
+	"description": "Automate actions like adding contacts, sending messages, and updating attributes between BotPenguin and 1000+ applications on N8N",
 	"license": "MIT",
 	"homepage": "",
 	"keywords": [
 		"n8n-community-node-package"
 	],
 	"author": {
-		"name": "Divyanshu Yadav",
-		"email": "divyanshu1@relinns.com"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/yadivyanshu1/e1-test.git"
+		"name": "BotPenguin",
+		"email": "developer@botpenguin.com"
 	},
 	"scripts": {
 		"build": "n8n-node build",

@@ -14,7 +14,7 @@ import { BASE_URL } from './constant';
 export class E1TestTrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'BotPenguin Trigger',
-		name: 'e1TestTrigger',
+		name: 'botPenguinTrigger',
 		icon: 'file:botpenguin.svg',
 		group: ['trigger'],
 		version: 1,
@@ -77,8 +77,6 @@ export class E1TestTrigger implements INodeType {
 				const webhookUrl = this.getNodeWebhookUrl('default') as string;
 				const eventType = this.getNodeParameter('eventType') as string;
 
-				this.logger.info(`E1TestTrigger: Checking if webhook exists. Event: ${eventType}, Webhook URL: ${webhookUrl}`);
-
 				try {
 					const response = await this.helpers.httpRequestWithAuthentication.call(this, 'botPenguinApi', {
 						method: 'POST',
@@ -98,8 +96,6 @@ export class E1TestTrigger implements INodeType {
 						json: true,
 					});
 
-					this.logger.info(`E1TestTrigger: Check exists API response: ${JSON.stringify(response)}`);
-
 					// Check if response has data array
 					if (response.success && Array.isArray(response.data) && response.data.length > 0) {
 						// Look through all items in the data array
@@ -110,7 +106,6 @@ export class E1TestTrigger implements INodeType {
 									// Check if any webhook URL matches our current webhook URL
 									for (const webhook of webhooks) {
 										if (webhook.url === webhookUrl) {
-											this.logger.info(`E1TestTrigger: Webhook already exists. URL: ${webhookUrl}`);
 											return true;
 										}
 									}
@@ -119,10 +114,8 @@ export class E1TestTrigger implements INodeType {
 						}
 					}
 
-					this.logger.info(`E1TestTrigger: Webhook does not exist. URL: ${webhookUrl}`);
 					return false;
 				} catch (error) {
-					this.logger.error(`E1TestTrigger: Check exists API failed. Error: ${error}`);
 					// If API call fails, assume webhook doesn't exist and let create handle it
 					return false;
 				}
@@ -136,8 +129,6 @@ export class E1TestTrigger implements INodeType {
 				const webhookUrl = this.getNodeWebhookUrl('default');
 				const eventType = this.getNodeParameter('eventType') as string;
 
-				this.logger.info(`E1TestTrigger: Subscribing to BotPenguin webhook. Event: ${eventType}, Webhook URL: ${webhookUrl}`);
-
 				const body = {
 					webhookUrl,
 					botId: credentials.botId,
@@ -148,10 +139,8 @@ export class E1TestTrigger implements INodeType {
 					subscribe: true,
 				};
 
-				this.logger.info(`E1TestTrigger: Subscribe payload: ${JSON.stringify(body)}`);
-
 				try {
-					const response = await this.helpers.httpRequestWithAuthentication.call(this, 'botPenguinApi', {
+					await this.helpers.httpRequestWithAuthentication.call(this, 'botPenguinApi', {
 						method: 'POST',
 						url: `${BASE_URL}/integrations/custom-app/subscribe-trigger-event`,
 						body,
@@ -163,9 +152,7 @@ export class E1TestTrigger implements INodeType {
 						},
 						json: true,
 					});
-					this.logger.info(`E1TestTrigger: Subscribe API success. Response: ${JSON.stringify(response)}`);
 				} catch (error) {
-					this.logger.error(`E1TestTrigger: Subscribe API failed. Error: ${error}`);
 					throw new NodeOperationError(this.getNode(), 'Failed to subscribe to BotPenguin webhook');
 				}
 				return true;
@@ -188,7 +175,6 @@ export class E1TestTrigger implements INodeType {
 					platform: credentials.platform,
 					subscribe: false,
 				};
-				this.logger.info(`E1TestTrigger: Unsubscribing to BotPenguin webhook. Event: ${eventType}, Webhook URL: ${webhookUrl}`);
 
 				try {
 					await this.helpers.httpRequestWithAuthentication.call(this, 'botPenguinApi', {
@@ -212,7 +198,6 @@ export class E1TestTrigger implements INodeType {
 	};
 
 	async webhook(this: IWebhookFunctions): Promise<IWebhookResponseData> {
-		this.logger.info(`E1TestTrigger: Webhook received. Body: ${JSON.stringify(this.getBodyData())}`);
 		const body = this.getBodyData();
 		const eventType = this.getNodeParameter('eventType') as string;
 

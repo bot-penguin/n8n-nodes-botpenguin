@@ -1,2 +1,1 @@
-
-export const BASE_URL = 'https://e1-api.botpenguin.com';
+export const BASE_URL = 'https://api.v7.botpenguin.com';

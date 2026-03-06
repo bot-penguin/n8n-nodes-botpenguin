@@ -4,7 +4,7 @@ import { BASE_URL } from '../nodes/E1Test/constant';
 export class BotPenguinApi implements ICredentialType {
 	name = 'botPenguinApi';
 	displayName = 'BotPenguin API';
-	documentationUrl = 'https://botpenguin.com';
+	documentationUrl = 'https://help.botpenguin.com';
 	icon: Icon = 'file:botpenguin.svg';
 
 	properties: INodeProperties[] = [

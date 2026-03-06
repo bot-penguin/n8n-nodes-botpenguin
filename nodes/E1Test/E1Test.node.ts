@@ -35,14 +35,14 @@ interface ContactPayload {
 
 export class E1Test implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'E1 Test',
-		name: 'e1Test',
+		displayName: 'BotPenguin',
+		name: 'botPenguin',
 		icon: 'file:botpenguin.svg',
 		group: ['transform'],
 		version: 1,
-		description: 'Create contacts in BotPenguin (E1 test).',
+		description: 'Create contacts in BotPenguin.',
 		defaults: {
-			name: 'E1 Test',
+			name: 'BotPenguin',
 		},
 		inputs: [NodeConnectionTypes.Main],
 		outputs: [NodeConnectionTypes.Main],
