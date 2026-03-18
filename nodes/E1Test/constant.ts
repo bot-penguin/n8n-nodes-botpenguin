@@ -1,0 +1,1 @@
+export const BASE_URL = 'https://api.v7.botpenguin.com';
