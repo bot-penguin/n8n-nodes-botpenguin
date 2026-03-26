@@ -363,7 +363,7 @@ export class E1Test implements INodeType {
 
 					const responseItems = Array.isArray(response) ? response : [response];
 					for (const entry of responseItems) {
-						returnData.push({ json: entry as IDataObject });
+						returnData.push({ json: entry as IDataObject, pairedItem: itemIndex });
 					}
 				} else if (operation === 'updateAttributes') {
 					const search = this.getNodeParameter('search', itemIndex) as string;
@@ -394,7 +394,7 @@ export class E1Test implements INodeType {
 
 					const responseItems = Array.isArray(response) ? response : [response];
 					for (const entry of responseItems) {
-						returnData.push({ json: entry as IDataObject });
+						returnData.push({ json: entry as IDataObject, pairedItem: itemIndex });
 					}
 				} else if (operation === 'sendSessionMessage') {
 					const search = this.getNodeParameter('searchMessage', itemIndex) as string;
@@ -422,7 +422,7 @@ export class E1Test implements INodeType {
 
 					const responseItems = Array.isArray(response) ? response : [response];
 					for (const entry of responseItems) {
-						returnData.push({ json: entry as IDataObject });
+						returnData.push({ json: entry as IDataObject, pairedItem: itemIndex });
 					}
 				} else if (operation === 'sendTemplateMessage') {
 					const whatsAppBot = this.getNodeParameter('whatsAppBot', itemIndex) as string;
@@ -454,7 +454,7 @@ export class E1Test implements INodeType {
 
 					const responseItems = Array.isArray(response) ? response : [response];
 					for (const entry of responseItems) {
-						returnData.push({ json: entry as IDataObject });
+						returnData.push({ json: entry as IDataObject, pairedItem: itemIndex });
 					}
 				}
 			} catch (error) {
@@ -550,4 +550,3 @@ async function getTemplateDynamicFields(this: ILoadOptionsFunctions): Promise<Re
 		})),
 	};
 }
-
