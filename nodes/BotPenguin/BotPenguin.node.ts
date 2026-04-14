@@ -41,6 +41,7 @@ export class BotPenguin implements INodeType {
 		group: ['transform'],
 		version: 1,
 		description: 'Create contacts in BotPenguin.',
+		subtitle: '={{$parameter["operation"]}}',
 		defaults: {
 			name: 'BotPenguin',
 		},

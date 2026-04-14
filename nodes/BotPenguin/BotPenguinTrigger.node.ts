@@ -19,6 +19,7 @@ export class BotPenguinTrigger implements INodeType {
 		group: ['trigger'],
 		version: 1,
 		description: 'Starts the workflow when BotPenguin events occur',
+		subtitle: '={{$parameter["eventType"]}}',
 		defaults: {
 			name: 'BotPenguin Trigger',
 		},
@@ -189,8 +190,8 @@ export class BotPenguinTrigger implements INodeType {
 						},
 						json: true,
 					});
-				} catch {
-					// Silent
+				} catch (error) {
+					throw new NodeOperationError(this.getNode(), `Failed to unsubscribe webhook: ${(error as Error).message}`);
 				}
 				return true;
 			},
