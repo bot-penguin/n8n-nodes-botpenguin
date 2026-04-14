@@ -11,7 +11,7 @@ import { NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 
 import { BASE_URL } from './constant';
 
-export class E1TestTrigger implements INodeType {
+export class BotPenguinTrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'BotPenguin Trigger',
 		name: 'botPenguinTrigger',

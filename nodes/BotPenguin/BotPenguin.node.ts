@@ -33,7 +33,7 @@ interface ContactPayload {
 	};
 }
 
-export class E1Test implements INodeType {
+export class BotPenguin implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'BotPenguin',
 		name: 'botPenguin',

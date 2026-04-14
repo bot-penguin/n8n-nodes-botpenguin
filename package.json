@@ -34,8 +34,8 @@
 			"dist/credentials/BotPenguinApi.credentials.js"
 		],
 		"nodes": [
-			"dist/nodes/E1Test/E1Test.node.js",
-			"dist/nodes/E1Test/E1TestTrigger.node.js"
+			"dist/nodes/BotPenguin/BotPenguin.node.js",
+			"dist/nodes/BotPenguin/BotPenguinTrigger.node.js"
 		]
 	},
 	"devDependencies": {
