@@ -7,7 +7,8 @@ import type {
 	IDataObject,
 } from 'n8n-workflow';
 
-import { NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
+import { NodeConnectionTypes, NodeApiError } from 'n8n-workflow';
+import type { JsonObject } from 'n8n-workflow';
 
 import { BASE_URL } from './constant';
 
@@ -92,7 +93,6 @@ export class BotPenguinTrigger implements INodeType {
 							Accept: '*/*',
 							'Content-Type': 'application/json',
 							authType: 'Key',
-							Authorization: `Bearer ${credentials.accessToken}`,
 						},
 						json: true,
 					});
@@ -149,12 +149,11 @@ export class BotPenguinTrigger implements INodeType {
 							Accept: '*/*',
 							'Content-Type': 'application/json',
 							authType: 'Key',
-							Authorization: `Bearer ${credentials.accessToken}`,
 						},
 						json: true,
 					});
 				} catch (error) {
-					throw new NodeOperationError(this.getNode(), 'Failed to subscribe to BotPenguin webhook');
+					throw new NodeApiError(this.getNode(), error as JsonObject);
 				}
 				return true;
 			},
@@ -186,12 +185,11 @@ export class BotPenguinTrigger implements INodeType {
 							Accept: '*/*',
 							'Content-Type': 'application/json',
 							authType: 'Key',
-							Authorization: `Bearer ${credentials.accessToken}`,
 						},
 						json: true,
 					});
 				} catch (error) {
-					throw new NodeOperationError(this.getNode(), `Failed to unsubscribe webhook: ${(error as Error).message}`);
+					throw new NodeApiError(this.getNode(), error as JsonObject);
 				}
 				return true;
 			},

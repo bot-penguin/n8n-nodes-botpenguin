@@ -9,7 +9,8 @@ import type {
 	ResourceMapperFields,
 	ResourceMapperField,
 } from 'n8n-workflow';
-import { NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
+import { NodeConnectionTypes, NodeApiError } from 'n8n-workflow';
+import type { JsonObject } from 'n8n-workflow';
 import { BASE_URL } from './constant';
 
 interface ContactPhone {
@@ -314,7 +315,6 @@ export class BotPenguin implements INodeType {
 				const operation = this.getNodeParameter('operation', itemIndex) as string;
 				const credentials = await this.getCredentials('botPenguinApi');
 				const botId = (credentials?.botId as string) || '';
-				const accessToken = (credentials?.accessToken as string) || '';
 				const platform =
 					typeof credentials?.platform === 'string'
 						? (credentials.platform as string).toLowerCase()
@@ -388,7 +388,6 @@ export class BotPenguin implements INodeType {
 							Accept: '*/*',
 							'Content-Type': 'application/json',
 							authtype: 'Key',
-							Authorization: `Bearer ${accessToken}`,
 						},
 						json: true,
 					});
@@ -415,7 +414,6 @@ export class BotPenguin implements INodeType {
 							Accept: '*/*',
 							'Content-Type': 'application/json',
 							authtype: 'Key',
-							Authorization: `Bearer ${accessToken}`,
 							botId,
 						},
 						json: true,
@@ -448,7 +446,6 @@ export class BotPenguin implements INodeType {
 							Accept: '*/*',
 							'Content-Type': 'application/json',
 							authtype: 'Key',
-							Authorization: `Bearer ${accessToken}`,
 						},
 						json: true,
 					});
@@ -466,7 +463,7 @@ export class BotPenguin implements INodeType {
 					});
 					continue;
 				}
-				throw new NodeOperationError(this.getNode(), error, { itemIndex });
+				throw new NodeApiError(this.getNode(), error as JsonObject, { itemIndex });
 			}
 		}
 
@@ -475,16 +472,12 @@ export class BotPenguin implements INodeType {
 }
 
 async function getWhatsAppBots(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
-	const credentials = await this.getCredentials('botPenguinApi');
-	const accessToken = (credentials?.accessToken as string) || '';
-
 	const response = await this.helpers.httpRequestWithAuthentication.call(this, 'botPenguinApi', {
 		method: 'GET',
 		url: `${BASE_URL}/whatsapp-automation`,
 		headers: {
 			Accept: '*/*',
 			authtype: 'Key',
-			Authorization: `Bearer ${accessToken}`,
 		},
 	});
 
@@ -501,16 +494,12 @@ async function getWhatsAppTemplates(this: ILoadOptionsFunctions): Promise<INodeP
 		return [];
 	}
 
-	const credentials = await this.getCredentials('botPenguinApi');
-	const accessToken = (credentials?.accessToken as string) || '';
-
 	const response = await this.helpers.httpRequestWithAuthentication.call(this, 'botPenguinApi', {
 		method: 'GET',
 		url: `${BASE_URL}/whatsapp-automation/plugin/templates/${botId}`,
 		headers: {
 			Accept: '*/*',
 			authtype: 'Key',
-			Authorization: `Bearer ${accessToken}`,
 		},
 	});
 
@@ -527,16 +516,12 @@ async function getTemplateDynamicFields(this: ILoadOptionsFunctions): Promise<Re
 		return { fields: [] };
 	}
 
-	const credentials = await this.getCredentials('botPenguinApi');
-	const accessToken = (credentials?.accessToken as string) || '';
-
 	const response = await this.helpers.httpRequestWithAuthentication.call(this, 'botPenguinApi', {
 		method: 'GET',
 		url: `${BASE_URL}/whatsapp-automation/plugin/make-template-dynamic-fields/${templateId}`,
 		headers: {
 			Accept: '*/*',
 			authtype: 'Key',
-			Authorization: `Bearer ${accessToken}`,
 		},
 	});
 

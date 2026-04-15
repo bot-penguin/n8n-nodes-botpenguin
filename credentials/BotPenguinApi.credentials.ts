@@ -4,7 +4,7 @@ import { BASE_URL } from '../nodes/BotPenguin/constant';
 export class BotPenguinApi implements ICredentialType {
 	name = 'botPenguinApi';
 	displayName = 'BotPenguin API';
-	documentationUrl = 'https://help.botpenguin.com';
+	documentationUrl = 'https://help.botpenguin.com/settings/integrations/n8n';
 	icon: Icon = 'file:botpenguin.svg';
 
 	properties: INodeProperties[] = [
@@ -46,9 +46,8 @@ export class BotPenguinApi implements ICredentialType {
 	authenticate = {
 		type: 'generic' as const,
 		properties: {
-			qs: {
-				access_token: '={{$credentials.accessToken}}',
-				botId: '={{$credentials.botId}}',
+			headers: {
+				Authorization: '=Bearer {{$credentials.accessToken}}',
 			},
 		},
 	};
