@@ -41,7 +41,7 @@ export class BotPenguin implements INodeType {
 		icon: 'file:botpenguin.svg',
 		group: ['transform'],
 		version: 1,
-		description: 'Create contacts in BotPenguin.',
+		description: 'Create contacts in BotPenguin',
 		subtitle: '={{$parameter["operation"]}}',
 		defaults: {
 			name: 'BotPenguin',
@@ -63,28 +63,28 @@ export class BotPenguin implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
-						name: 'Add a Contact',
+						name: 'Add Contact',
 						value: 'createContact',
-						action: 'Add a contact',
-						description: 'Create a contact in BotPenguin.',
+						action: 'Add contact',
+						description: 'Create a contact in BotPenguin',
 					},
 					{
 						name: 'Update Contact Attributes',
 						value: 'updateAttributes',
 						action: 'Update contact attributes',
-						description: 'Update a contact attribute in BotPenguin.',
+						description: 'Update a contact attribute in BotPenguin',
 					},
 					{
 						name: 'Send Session Message',
 						value: 'sendSessionMessage',
-						action: 'Send a session message',
-						description: 'Send a session message.',
+						action: 'Send session message',
+						description: 'Send a session message',
 					},
 					{
 						name: 'Send Template Message',
 						value: 'sendTemplateMessage',
-						action: 'Send a template message',
-						description: 'Send a WhatsApp template message.',
+						action: 'Send template message',
+						description: 'Send a WhatsApp template message',
 					},
 				],
 				default: 'createContact',
@@ -94,8 +94,8 @@ export class BotPenguin implements INodeType {
 				name: 'phonePrefix',
 				type: 'string',
 				default: '91',
-				placeholder: '91',
-				description: 'Country calling code (prefix).',
+				placeholder: 'e.g. 91',
+				description: 'Country calling code (prefix)',
 				required: true,
 				displayOptions: {
 					show: {
@@ -108,8 +108,8 @@ export class BotPenguin implements INodeType {
 				name: 'phoneNumber',
 				type: 'string',
 				default: '',
-				placeholder: '9876543210',
-				description: 'Phone number without country code.',
+				placeholder: 'e.g. 9876543210',
+				description: 'Phone number without country code',
 				required: true,
 				displayOptions: {
 					show: {
@@ -122,9 +122,9 @@ export class BotPenguin implements INodeType {
 				name: 'userProvidedName',
 				type: 'string',
 				default: '',
-				placeholder: 'Jane Doe',
+				placeholder: 'e.g. Jane Doe',
 				required: true,
-				description: 'Full name of the contact.',
+				description: 'Full name of the contact',
 				displayOptions: {
 					show: {
 						operation: ['createContact'],
@@ -136,8 +136,8 @@ export class BotPenguin implements INodeType {
 				name: 'email',
 				type: 'string',
 				default: '',
-				placeholder: 'jane@example.com',
-				description: 'Email address of the contact.',
+				placeholder: 'e.g. jane@example.com',
+				description: 'Email address of the contact',
 				displayOptions: {
 					show: {
 						operation: ['createContact'],
@@ -149,9 +149,9 @@ export class BotPenguin implements INodeType {
 				name: 'search',
 				type: 'string',
 				default: '',
-				placeholder: 'email / WhatsApp number with country code / UUID',
+				placeholder: 'e.g. email / WhatsApp number with country code / UUID',
 				description:
-					'Please provide any one of the email, WhatsApp number, or UUID to update the user contact custom attribute. WhatsApp numbers should include the country code; only numeric values are allowed.',
+					'Please provide any one of the email, WhatsApp number, or UUID to update the user contact custom attribute. WhatsApp numbers should include the country code; only numeric values are allowed',
 				required: true,
 				displayOptions: {
 					show: {
@@ -164,8 +164,8 @@ export class BotPenguin implements INodeType {
 				name: 'attributeKey',
 				type: 'string',
 				default: '',
-				placeholder: 'attribute key',
-				description: 'Enter the key of the attribute that needs to be updated here.',
+				placeholder: 'e.g. attribute key',
+				description: 'Enter the key of the attribute that needs to be updated here',
 				required: true,
 				displayOptions: {
 					show: {
@@ -178,8 +178,8 @@ export class BotPenguin implements INodeType {
 				name: 'attributeValue',
 				type: 'string',
 				default: '',
-				placeholder: 'new value',
-				description: 'Enter the value to be updated here.',
+				placeholder: 'e.g. new value',
+				description: 'Enter the value to be updated here',
 				required: true,
 				displayOptions: {
 					show: {
@@ -192,9 +192,9 @@ export class BotPenguin implements INodeType {
 				name: 'searchMessage',
 				type: 'string',
 				default: '',
-				placeholder: 'email / WhatsApp number with country code / UUID',
+				placeholder: 'e.g. email / WhatsApp number with country code / UUID',
 				description:
-					'Please provide any one of the email, WhatsApp number, or UUID to send a message. WhatsApp numbers should include the country code; only numeric values are allowed.',
+					'Please provide any one of the email, WhatsApp number, or UUID to send a message. WhatsApp numbers should include the country code; only numeric values are allowed',
 				required: true,
 				displayOptions: {
 					show: {
@@ -207,8 +207,8 @@ export class BotPenguin implements INodeType {
 				name: 'messageText',
 				type: 'string',
 				default: '',
-				placeholder: 'Hello!',
-				description: 'Enter the message text to be sent.',
+				placeholder: 'e.g. Hello!',
+				description: 'Enter the message text to be sent',
 				required: true,
 				displayOptions: {
 					show: {
@@ -221,7 +221,7 @@ export class BotPenguin implements INodeType {
 				name: 'whatsAppBot',
 				type: 'options',
 				default: '',
-				description: 'Select the WhatsApp bot to send messages.',
+				description: 'Select the WhatsApp bot to send messages',
 				required: true,
 				typeOptions: {
 					loadOptionsMethod: 'getWhatsAppBots',
@@ -237,7 +237,7 @@ export class BotPenguin implements INodeType {
 				name: 'whatsAppTemplate',
 				type: 'options',
 				default: '',
-				description: 'Select your WhatsApp message template.',
+				description: 'Select your WhatsApp message template',
 				required: true,
 				typeOptions: {
 					loadOptionsMethod: 'getWhatsAppTemplates',
@@ -254,8 +254,8 @@ export class BotPenguin implements INodeType {
 				name: 'whatsAppNumber',
 				type: 'string',
 				default: '',
-				placeholder: '91988101XXXX',
-				description: 'Enter the recipient\'s mobile number with the country code & without plus sign. (e.g. 91988101XXXX)',
+				placeholder: 'e.g. 91988101XXXX',
+				description: 'Enter the recipient\'s mobile number with the country code & without plus sign',
 				required: true,
 				displayOptions: {
 					show: {
