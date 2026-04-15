@@ -284,7 +284,7 @@ export class BotPenguin implements INodeType {
 						addAllFields: true,
 						supportAutoMap: false,
 						multiKeyMatch: false,
-						noFieldsError: 'Select a WhatsApp template above to load its variables.',
+						noFieldsError: 'Select a WhatsApp template above to load its variables',
 					},
 				},
 				displayOptions: {
