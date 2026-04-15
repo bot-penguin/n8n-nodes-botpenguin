@@ -1,6 +1,6 @@
 {
 	"name": "@bp-n8n/n8n-nodes-botpenguin",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "Automate actions like adding contacts, sending messages, and updating attributes between BotPenguin and 1000+ applications on N8N",
 	"license": "MIT",
 	"homepage": "https://github.com/bot-penguin/n8n-nodes-botpenguin.git",
