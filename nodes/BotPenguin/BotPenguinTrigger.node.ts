@@ -79,47 +79,39 @@ export class BotPenguinTrigger implements INodeType {
 				const webhookUrl = this.getNodeWebhookUrl('default') as string;
 				const eventType = this.getNodeParameter('eventType') as string;
 
-				try {
-					const response = await this.helpers.httpRequestWithAuthentication.call(this, 'botPenguinApi', {
-						method: 'POST',
-						url: `${BASE_URL}/integrations/custom-app/fetch-subscribed-webhooks`,
-						body: {
-							botId: credentials.botId,
-							event: eventType,
-							slug: 'n8n',
-							category: 'n8n',
-						},
-						headers: {
-							Accept: '*/*',
-							'Content-Type': 'application/json',
-							authType: 'Key',
-						},
-						json: true,
-					});
+				const response = await this.helpers.httpRequestWithAuthentication.call(this, 'botPenguinApi', {
+					method: 'POST',
+					url: `${BASE_URL}/integrations/custom-app/fetch-subscribed-webhooks`,
+					body: {
+						botId: credentials.botId,
+						event: eventType,
+						slug: 'n8n',
+						category: 'n8n',
+					},
+					headers: {
+						Accept: '*/*',
+						'Content-Type': 'application/json',
+						authType: 'Key',
+					},
+					json: true,
+				});
 
-					// Check if response has data array
-					if (response.success && Array.isArray(response.data) && response.data.length > 0) {
-						// Look through all items in the data array
-						for (const item of response.data) {
-							if (item.integrationCredentials && item.integrationCredentials[eventType]) {
-								const webhooks = item.integrationCredentials[eventType];
-								if (Array.isArray(webhooks)) {
-									// Check if any webhook URL matches our current webhook URL
-									for (const webhook of webhooks) {
-										if (webhook.url === webhookUrl) {
-											return true;
-										}
+				if (response.success && Array.isArray(response.data) && response.data.length > 0) {
+					for (const item of response.data) {
+						if (item.integrationCredentials && item.integrationCredentials[eventType]) {
+							const webhooks = item.integrationCredentials[eventType];
+							if (Array.isArray(webhooks)) {
+								for (const webhook of webhooks) {
+									if (webhook.url === webhookUrl) {
+										return true;
 									}
 								}
 							}
 						}
 					}
-
-					return false;
-				} catch (error) {
-					// If API call fails, assume webhook doesn't exist and let create handle it
-					return false;
 				}
+
+				return false;
 			},
 			async create(this: IHookFunctions): Promise<boolean> {
 				const credentials = await this.getCredentials('botPenguinApi');
