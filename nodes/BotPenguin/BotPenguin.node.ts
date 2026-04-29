@@ -6,11 +6,11 @@ import type {
 	INodePropertyOptions,
 	INodeType,
 	INodeTypeDescription,
+	JsonObject,
 	ResourceMapperFields,
 	ResourceMapperField,
 } from 'n8n-workflow';
 import { NodeConnectionTypes, NodeApiError } from 'n8n-workflow';
-import type { JsonObject } from 'n8n-workflow';
 import { BASE_URL } from './constant';
 
 interface ContactPhone {
@@ -150,8 +150,7 @@ export class BotPenguin implements INodeType {
 				type: 'string',
 				default: '',
 				placeholder: 'e.g. email / WhatsApp number with country code / UUID',
-				description:
-					'Please provide any one of the email, WhatsApp number, or UUID to update the user contact custom attribute. WhatsApp numbers should include the country code; only numeric values are allowed',
+				description: 'Please provide any one of the email, WhatsApp number, or UUID to update the user contact custom attribute. WhatsApp numbers should include the country code; only numeric values are allowed.',
 				required: true,
 				displayOptions: {
 					show: {
@@ -193,8 +192,7 @@ export class BotPenguin implements INodeType {
 				type: 'string',
 				default: '',
 				placeholder: 'e.g. email / WhatsApp number with country code / UUID',
-				description:
-					'Please provide any one of the email, WhatsApp number, or UUID to send a message. WhatsApp numbers should include the country code; only numeric values are allowed',
+				description: 'Please provide any one of the email, WhatsApp number, or UUID to send a message. WhatsApp numbers should include the country code; only numeric values are allowed.',
 				required: true,
 				displayOptions: {
 					show: {
@@ -217,11 +215,11 @@ export class BotPenguin implements INodeType {
 				},
 			},
 			{
-				displayName: 'Select WhatsApp Bot',
+				displayName: 'Select WhatsApp Bot Name or ID',
 				name: 'whatsAppBot',
 				type: 'options',
 				default: '',
-				description: 'Select the WhatsApp bot to send messages',
+				description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 				required: true,
 				typeOptions: {
 					loadOptionsMethod: 'getWhatsAppBots',
@@ -233,11 +231,11 @@ export class BotPenguin implements INodeType {
 				},
 			},
 			{
-				displayName: 'Select WhatsApp Template',
+				displayName: 'Select WhatsApp Template Name or ID',
 				name: 'whatsAppTemplate',
 				type: 'options',
 				default: '',
-				description: 'Select your WhatsApp message template',
+				description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 				required: true,
 				typeOptions: {
 					loadOptionsMethod: 'getWhatsAppTemplates',
