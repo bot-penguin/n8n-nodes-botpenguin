@@ -5,10 +5,10 @@ import type {
 	INodeTypeDescription,
 	IWebhookResponseData,
 	IDataObject,
+	JsonObject 
 } from 'n8n-workflow';
 
 import { NodeConnectionTypes, NodeApiError } from 'n8n-workflow';
-import type { JsonObject } from 'n8n-workflow';
 
 import { BASE_URL } from './constant';
 
@@ -66,6 +66,7 @@ export class BotPenguinTrigger implements INodeType {
 				],
 			},
 		],
+		usableAsTool: true,
 	};
 
 	webhookMethods = {
